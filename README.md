@@ -80,9 +80,9 @@ No env vars required.
 ---
 
 ## Troubleshooting
--CORS error: ensure new Server(server, { cors: { origin: "*" }}) or set allowed origins.
--Auto-scroll not working: verify chatRef + useLayoutEffect scroll to bottom after messages update.
--System messages missing: make sure server emits system on disconnecting with the room info, or rebind client listeners when currentRoom changes.
+- CORS error: ensure new Server(server, { cors: { origin: "*" }}) or set allowed origins.
+- Auto-scroll not working: verify chatRef + useLayoutEffect scroll to bottom after messages update.
+- System messages missing: make sure server emits system on disconnecting with the room info, or rebind client listeners when currentRoom changes.
 
 ---
 
