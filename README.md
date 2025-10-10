@@ -52,33 +52,41 @@ npm run dev(open http://localhost:5173)
 ## Socket Events
 -Client → Server
 
--join room: { room }
--leave room: { room }
--new message: { room, username, message }
--dm: { targetUsername, from, message }
+-**join room:** { room }
+-**leave room:** { room }
+-**new message:** { room, username, message }
+-**dm:** { targetUsername, from, message }
 
 -Server → Client
 
--new message: { room, username, message }
-system: { room?, message }
-dm: { from, to, message, ts, self? }
+-**new message:** { room, username, message }
+-**system:** { room?, message }
+-**dm:** { from, to, message, ts, self? }
+
+---
 
 ## Quick Test
 1. Open two browser windows (or an incognito tab).
 2. Use different usernames, join the same room, exchange messages.
 3. Try closing a tab: the remaining user should see a “left” system message.
 
+---
+
 ## Config & Ports
 No env vars required.
--Change server port in server.js (server.listen(3000)).
--Change Vite port via vite.config.js or npm run dev -- --port 5174.
+-**Change server port in server.js (server.listen(3000)).**
+-**Change Vite port via vite.config.js or npm run dev -- --port 5174.**
 
-#Troubleshooting
+---
+
+## Troubleshooting
 -CORS error: ensure new Server(server, { cors: { origin: "*" }}) or set allowed origins.
 -Auto-scroll not working: verify chatRef + useLayoutEffect scroll to bottom after messages update.
 -System messages missing: make sure server emits system on disconnecting with the room info, or rebind client listeners when currentRoom changes.
 
-#License
+---
+
+## License
 MIT (feel free to change to your preferred license).
 
 
