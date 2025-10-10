@@ -50,18 +50,18 @@ npm run dev(open http://localhost:5173)
 ---
 
 ## Socket Events
--Client → Server
+Client → Server
 
--**join room:** { room }
--**leave room:** { room }
--**new message:** { room, username, message }
--**dm:** { targetUsername, from, message }
+join room: { room }
+leave room: { room }
+new message: { room, username, message }
+dm: { targetUsername, from, message }
 
--Server → Client
+Server → Client
 
--**new message:** { room, username, message }
--**system:** { room?, message }
--**dm:** { from, to, message, ts, self? }
+new message: { room, username, message }
+system: { room?, message }
+dm: { from, to, message, ts, self? }
 
 ---
 
@@ -74,7 +74,7 @@ npm run dev(open http://localhost:5173)
 
 ## Config & Ports
 No env vars required.
--**Change server port in server.js (server.listen(3000)).**
+-Change server port in server.js (server.listen(3000)).
 -**Change Vite port via vite.config.js or npm run dev -- --port 5174.**
 
 ---
