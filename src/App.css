@@ -1,0 +1,116 @@
+:root{
+  --bg:#111315;           /* page background */
+  --surface:#1a1d1f;      /* bars/cards */
+  --elev:#21262b;         /* inputs/bubbles */
+  --text:#e5e7eb;         /* main text */
+  --muted:#9ca3af;        /* secondary text */
+  --primary:#3b82f6;      /* accent */
+  --ring:#60a5fa;         /* focus ring */
+  --shadow:0 8px 24px rgba(0,0,0,.35);
+  --radius:12px;
+  --nav-h:140px;          
+  --input-h:72px;         
+}
+
+.Layout{
+  height:100dvh;
+  display:flex;
+  flex-direction: column;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  overflow: hidden;
+}
+
+/* Header */
+.Navbar{
+  position:sticky; top:0; z-index:10;
+  background:#1a1d1f; 
+  border-bottom:1px solid #252a2e;
+  padding:16px;
+}
+.Navbar h1{margin:0 0 6px;font-size:28px}
+.Navbar h2{margin:0 0 12px;color:var(--muted);font-weight:600;font-size:18px}
+
+/* Rows */
+.Card{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.Card>input,.MessageInput>input,input[type="text"]{
+  flex:1 1 auto;background:var(--elev);color:var(--text);
+  border:1px solid #2a2f34;border-radius:var(--radius);padding:12px 14px;outline:none
+}
+.Card>input::placeholder,.MessageInput>input::placeholder{color:#75808b}
+.Card>input:focus,.MessageInput>input:focus{
+  border-color:var(--ring);
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--ring) 35%, transparent)
+}
+
+/* Buttons */
+button{
+  background:var(--primary);color:#fff;border:0;border-radius:var(--radius);
+  padding:10px 14px;font-weight:600;cursor:pointer
+}
+button:hover{filter:brightness(1.1)}
+button:active{transform:translateY(1px)}
+button[disabled]{opacity:.5;cursor:not-allowed}
+
+/* Chat list fills viewport between header & input */
+.ChatPane{
+  flex: 1 1 auto; 
+  min-height: 0;                    
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.ChatList{
+  display:flex; flex-direction:column; gap:8px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  overscroll-behavior: contain;
+}
+
+.ChatList,
+.MessageInput {
+  background: var(--surface);
+}
+
+/* Message bubbles */
+.msg{
+  background:var(--surface);border:1px solid #2a2f34;border-radius:14px;
+  padding:10px 12px;
+  max-width:min(88%, 920px);
+  width:fit-content
+}
+.msg.self{                         
+  align-self:flex-end;
+  background:color-mix(in srgb, var(--primary) 18%, var(--surface));
+  border-color:color-mix(in srgb, var(--primary) 40%, #2a2f34)
+}
+.msg.system{                       
+  align-self:center;background:transparent;border:0;color:var(--muted);font-size:14px
+}
+.msg.dm{                           
+  border-left:4px solid #10b981;padding-left:10px
+}
+
+/* Input bar */
+.MessageInput{
+  flex: 0 0 var(--input-h); 
+  border-top: 1px solid #252a2e;
+  display:flex; align-items:center; gap:8px;     
+  padding:10px 12px;                             
+  background:#1a1d1f;  
+}
+
+/* Responsive */
+@media (max-width:640px){
+  :root{--nav-h:180px;--input-h:68px}
+  .Navbar h1{font-size:22px}.Navbar h2{font-size:16px}
+  .Card{flex-wrap:wrap}.msg{max-width:85%}
+}
