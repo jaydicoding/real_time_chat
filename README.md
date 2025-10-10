@@ -40,7 +40,7 @@ react-socketio-chat/
 ### Install
 npm install
 
-Run(two terminals)
+-Run(two terminals)
 Terminal A - server
 node server.js
 
