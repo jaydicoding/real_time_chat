@@ -85,7 +85,7 @@ http://localhost:5173
 
 ## Preview
 
-<img src="../../images/Real-Time-Chat.gif" width="700">
+<img src="images/Real-Time-Chat.gif" width="700">
 
 ---
 
