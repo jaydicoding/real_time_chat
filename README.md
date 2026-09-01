@@ -1,8 +1,4 @@
-# Real Time Chat
-
-## Live Demo
-
-**[Try the AI Poet Application](https://langchain-poet-ldkxwqjp94augfv9vqslda.streamlit.app/)**
+# Real-Time Chat
 
 A minimal real-time chat application built with **React**, **Express**, and **Socket.IO**.
 
@@ -34,7 +30,7 @@ Users can join chat rooms, exchange messages in real time, and send direct messa
 ## Project Structure
 
 ```text
-react-socketio-chat/
+reactSocketIOChatApp/
 ├── public/
 ├── src/
 │   ├── App.jsx
@@ -58,7 +54,7 @@ git clone YOUR_GITHUB_REPOSITORY_URL
 Move into the project directory.
 
 ```bash
-cd WebTutorial\reactSocketIOChatApp
+cd WebTutorial/reactSocketIOChatApp
 ```
 
 Install the dependencies.
@@ -89,7 +85,7 @@ http://localhost:5173
 
 ## Preview
 
-<img src="images/ai-poet.gif" width="700">
+<img src="../../images/Real-Time-Chat.gif" width="700">
 
 ---
 
@@ -113,11 +109,12 @@ http://localhost:5173
 ## Quick Test
 
 1. Open two browser windows or use an incognito tab.
-2. Enter different usernames.
+2. Enter different usernames and connect both users.
 3. Join the same chat room.
 4. Exchange messages between the two users.
 5. Try sending a direct message.
-6. Close one tab and check that the remaining user receives a "left" system message.
+6. Leave the room or disconnect one user and check that the other user receives the appropriate system message.
+7. Open multiple tabs with the same username and verify that a "left" message is only shown when the user's final connection is closed.
 
 ---
 
@@ -166,3 +163,4 @@ Verify that `chatRef` and `useLayoutEffect` are correctly configured to scroll t
 Make sure the server emits the `system` event during `disconnecting` with the correct room information.
 
 Also check that client event listeners are rebound correctly when `currentRoom` changes.
+
