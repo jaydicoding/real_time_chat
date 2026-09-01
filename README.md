@@ -1,90 +1,168 @@
-# React + Socket.IO Chat
+# Real Time Chat
 
-A minimal real-time chat demo.  
-**Frontend:** React (Vite) · **Backend:** Express + Socket.IO (Node.js)
+## Live Demo
+
+**[Try the AI Poet Application](https://langchain-poet-ldkxwqjp94augfv9vqslda.streamlit.app/)**
+
+A minimal real-time chat application built with **React**, **Express**, and **Socket.IO**.
+
+Users can join chat rooms, exchange messages in real time, and send direct messages to other users.
 
 ---
 
 ## Features
-- Join/leave rooms: `join room`, `leave room`
-- Room broadcast: `new message`
-- 1:1 direct messages: `dm`
-- System notifications for join/leave
-- Multi-tab user handling (avoid duplicate “left” when another tab remains)
-- Responsive UI with auto-scroll to the latest message
 
----
-
-## Project Strucuture
-react-socketio-chat/
-├─ public/
-├─ src/
-│  ├─ App.jsx
-│  └─ App.css
-├─ server.js # Express + Socket.IO server
-├─ package.json
-├─ vite.config.js
-└─ .gitignore
+- Join and leave chat rooms
+- Send and receive real-time room messages
+- Send 1:1 direct messages
+- System notifications when users join or leave
+- Multi-tab user handling to avoid duplicate "left" messages
+- Responsive chat interface
+- Auto-scroll to the latest message
 
 ---
 
 ## Tech Stack
-- **Client:** React 18, Vite  
-- **Server:** Node.js, Express, Socket.IO  
-- **Node version:** ≥ 18 recommended
+
+- **Frontend:** React 18, Vite
+- **Backend:** Node.js, Express
+- **Real-Time Communication:** Socket.IO
+- **Node Version:** Node.js 18 or later recommended
 
 ---
 
-## Getting started
+## Project Structure
 
-### Install
+```text
+react-socketio-chat/
+├── public/
+├── src/
+│   ├── App.jsx
+│   └── App.css
+├── server.js
+├── package.json
+├── vite.config.js
+└── .gitignore
+```
+
+---
+
+## Installation
+
+Clone the repository.
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+```
+
+Move into the project directory.
+
+```bash
+cd WebTutorial\reactSocketIOChatApp
+```
+
+Install the dependencies.
+
+```bash
 npm install
+```
 
-**Run(two terminals)**
-- Terminal A: server
+Run the Socket.IO server in the first terminal.
+
+```bash
 node server.js
+```
 
-- Terminal B: client
-npm run dev(open http://localhost:5173)
+Run the React client in a second terminal.
+
+```bash
+npm run dev
+```
+
+Open the application in your browser:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Preview
+
+<img src="images/ai-poet.gif" width="700">
 
 ---
 
 ## Socket Events
-**Client → Server**
-- join room: { room }
-- leave room: { room }
-- new message: { room, username, message }
-- dm: { targetUsername, from, message }
 
-**Server → Client**
-- new message: { room, username, message }
-- system: { room?, message }
-- dm: { from, to, message, ts, self? }
+### Client → Server
+
+- `join room`: `{ room }`
+- `leave room`: `{ room }`
+- `new message`: `{ room, username, message }`
+- `dm`: `{ targetUsername, from, message }`
+
+### Server → Client
+
+- `new message`: `{ room, username, message }`
+- `system`: `{ room?, message }`
+- `dm`: `{ from, to, message, ts, self? }`
 
 ---
 
 ## Quick Test
-1. Open two browser windows (or an incognito tab).
-2. Use different usernames, join the same room, exchange messages.
-3. Try closing a tab: the remaining user should see a “left” system message.
+
+1. Open two browser windows or use an incognito tab.
+2. Enter different usernames.
+3. Join the same chat room.
+4. Exchange messages between the two users.
+5. Try sending a direct message.
+6. Close one tab and check that the remaining user receives a "left" system message.
 
 ---
 
 ## Config & Ports
-**No env vars required.**
-- Change server port in server.js (server.listen(3000)).
-- Change Vite port via vite.config.js or npm run dev -- --port 5174.
+
+**No environment variables are required.**
+
+The Socket.IO server runs on port `3000` by default.
+
+```javascript
+server.listen(3000)
+```
+
+The Vite development server runs on port `5173` by default.
+
+To use a different Vite port:
+
+```bash
+npm run dev -- --port 5174
+```
+
+You can also configure the port in `vite.config.js`.
 
 ---
 
 ## Troubleshooting
-- CORS error: ensure new Server(server, { cors: { origin: "*" }}) or set allowed origins.
-- Auto-scroll not working: verify chatRef + useLayoutEffect scroll to bottom after messages update.
-- System messages missing: make sure server emits system on disconnecting with the room info, or rebind client listeners when currentRoom changes.
 
----
+### CORS Error
 
-## License
-MIT (feel free to change to your preferred license).
+Make sure the Socket.IO server allows the required origin.
 
+```javascript
+new Server(server, {
+  cors: {
+    origin: "*"
+  }
+})
+```
 
+### Auto-scroll Not Working
+
+Verify that `chatRef` and `useLayoutEffect` are correctly configured to scroll to the bottom whenever the messages are updated.
+
+### System Messages Missing
+
+Make sure the server emits the `system` event during `disconnecting` with the correct room information.
+
+Also check that client event listeners are rebound correctly when `currentRoom` changes.
